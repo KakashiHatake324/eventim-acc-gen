@@ -21,7 +21,7 @@ type TestStructure struct {
 }
 
 var (
-	proxy          = "http://events1354:JYfEhysD@93.119.191.74:61234"
+	proxy          = "http://PROXY"
 	userAgent      = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
 	sensorGenLoops = 5
 )
