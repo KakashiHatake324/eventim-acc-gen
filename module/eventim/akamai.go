@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	inHouseApiURL = "54.89.221.182"
-	apiKey        = "AKAMAI_KEY"
+	inHouseApiURL = "https://api.frisapi.dev/akamai"
+	apiKey        = "YOUR_KEY"
 	apiIndicator  = "success"
 )
 
@@ -26,7 +26,7 @@ func (t *TestStructure) genInHouseSensorData() error {
 		Client:         http.DefaultClient,
 		CTX:            t.Context,
 		AcceptedStatus: []int{200},
-		Req:            map[string]string{"Method": "POST", "URL": fmt.Sprintf("http://%s/sensor", inHouseApiURL), "Data": string(jsonData)},
+		Req:            map[string]string{"Method": "POST", "URL": fmt.Sprintf("%s/sensor", inHouseApiURL), "Data": string(jsonData)},
 		Headers:        map[string][]string{"accept": {"application/json"}, "content-type": {"application/json"}},
 	}
 	response := Request.MakeRequest()
@@ -55,7 +55,7 @@ func (t *TestStructure) genInHousePixelData() error {
 		Client:         http.DefaultClient,
 		CTX:            t.Context,
 		AcceptedStatus: []int{200},
-		Req:            map[string]string{"Method": "POST", "URL": fmt.Sprintf("http://%s/pixel", inHouseApiURL), "Data": string(jsonData)},
+		Req:            map[string]string{"Method": "POST", "URL": fmt.Sprintf("%s/pixel", inHouseApiURL), "Data": string(jsonData)},
 		Headers:        map[string][]string{"accept": {"application/json"}, "content-type": {"application/json"}},
 	}
 	response := Request.MakeRequest()
@@ -99,6 +99,7 @@ func (t *TestStructure) generateAkamaiPixelRequest() error {
 	t.Akamai.Pixel = &module.InhousePixelAkamai{
 		ApiKey:    apiKey,
 		Ua:        userAgent,
+		PageURL:   t.Headers.Referrer,
 		ScriptVal: t.Akamai.ScriptVal,
 		PixelID:   t.Akamai.Baza,
 	}
@@ -106,6 +107,7 @@ func (t *TestStructure) generateAkamaiPixelRequest() error {
 }
 
 func (t *TestStructure) postSensorData() error {
+	totalGens++
 	log.Println("posting akamai sensor data")
 	postData := map[string]string{
 		"sensor_data": t.Akamai.SensorData,

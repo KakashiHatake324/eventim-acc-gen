@@ -42,6 +42,7 @@ type InhouseSensorAkamai struct {
 type InhousePixelAkamai struct {
 	ApiKey    string `json:"apiKey"`
 	Ua        string `json:"ua"`
+	PageURL   string `json:"pageUrl"`
 	ScriptVal string `json:"scriptVal"`
 	PixelID   string `json:"pixelId"`
 }

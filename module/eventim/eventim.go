@@ -21,9 +21,10 @@ type TestStructure struct {
 }
 
 var (
-	proxy          = "http://PROXY"
-	userAgent      = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36"
+	proxy          = "http://YOUR_PROXY"
+	userAgent      = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
 	sensorGenLoops = 5
+	totalGens      = 0
 )
 
 func (t *TestStructure) GenerateEventimAcc() error {
@@ -103,6 +104,7 @@ func (t *TestStructure) GenerateEventimAcc() error {
 	if err := t.putRegistrationDetails(); err != nil {
 		return err
 	}
+	log.Println("Total gens:", totalGens)
 
 	return nil
 }
